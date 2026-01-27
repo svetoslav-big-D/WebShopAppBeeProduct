@@ -22,6 +22,12 @@ namespace BeeProductApp.Infrastructure.Data.Infrastucture
             await RoleSeeder(services);
             await SeedAdministrator(services);
 
+            var dataCategory = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            SeedCategories(dataCategory);
+
+            var dataBrand = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            SeedBrands(dataBrand);
+
             return app;
         }
 
