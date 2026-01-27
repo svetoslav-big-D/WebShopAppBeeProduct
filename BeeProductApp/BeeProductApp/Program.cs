@@ -1,4 +1,6 @@
 using BeeProductApp.Infrastructure.Data;
+using BeeProductApp.Infrastructure.Data.Domain;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +18,7 @@ namespace BeeProductApp
                 options.UseSqlServer(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => {
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => {
                 options.SignIn.RequireConfirmedAccount = false;
                 options.SignIn.RequireConfirmedAccount = false;
                 options.Password.RequireDigit = false;
