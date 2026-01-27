@@ -1,5 +1,6 @@
 using BeeProductApp.Infrastructure.Data;
 using BeeProductApp.Infrastructure.Data.Domain;
+using BeeProductApp.Infrastructure.Data.Infrastucture;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -27,10 +28,12 @@ namespace BeeProductApp
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequiredLength = 5;
             })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+            app.PrepareDatabase();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
