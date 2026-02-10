@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36310.24 d17.14
+VisualStudioVersion = 17.14.36310.24
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeProductApp", "BeeProductApp\BeeProductApp.csproj", "{AAB1E5BE-A2C2-421C-85E2-8BA7FF4E5DFB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeProductApp.Infrastructure", "BeeProductApp.Infrastructure\BeeProductApp.Infrastructure.csproj", "{3AB55CEE-9555-40B4-85D2-CB8F799E760A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeeProductApp.Core", "BeeProductApp.Core\BeeProductApp.Core.csproj", "{1ED8C63A-E582-44A4-A9CE-8DABB818B143}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3AB55CEE-9555-40B4-85D2-CB8F799E760A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AB55CEE-9555-40B4-85D2-CB8F799E760A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AB55CEE-9555-40B4-85D2-CB8F799E760A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ED8C63A-E582-44A4-A9CE-8DABB818B143}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ED8C63A-E582-44A4-A9CE-8DABB818B143}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ED8C63A-E582-44A4-A9CE-8DABB818B143}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ED8C63A-E582-44A4-A9CE-8DABB818B143}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
