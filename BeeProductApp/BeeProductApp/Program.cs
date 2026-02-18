@@ -1,3 +1,5 @@
+using BeeProductApp.Core.Contracts;
+using BeeProductApp.Core.Services;
 using BeeProductApp.Infrastructure.Data;
 using BeeProductApp.Infrastructure.Data.Domain;
 using BeeProductApp.Infrastructure.Data.Infrastucture;
@@ -16,8 +18,12 @@ namespace BeeProductApp
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseLazyLoadingProxies().
+                UseSqlServer(connectionString));
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => {
                 options.SignIn.RequireConfirmedAccount = false;
@@ -31,6 +37,9 @@ namespace BeeProductApp
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddTransient<ICategoryService, CategoryService>();
+            builder.Services.AddTransient<IBrandService, BrandService>();
 
             var app = builder.Build();
             app.PrepareDatabase();
