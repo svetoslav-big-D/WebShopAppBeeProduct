@@ -1,14 +1,45 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BeeProductApp.Core.Contracts;
+using BeeProductApp.Models.Brand;
+using BeeProductApp.Models.Category;
+using BeeProductApp.Models.Product;
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeeProductApp.Controllers
 {
     public class ProductController : Controller
     {
-        // GET: ProductController
-        public ActionResult Index()
+        private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
+        private readonly IBrandService _brandService;
+
+        public ProductController(IProductService productService, ICategoryService categoryService, IBrandService brandService)
         {
-            return View();
+            this._productService = productService;
+            this._categoryService = categoryService;
+            this._brandService = brandService;
+        }
+
+        // GET: ProductController
+        public ActionResult Index(string searchStringCategoryName, string searchStringBrandName)
+        {
+            List<ProductIndexVM> products = _productService.GetProducts(searchStringCategoryName, searchStringBrandName)
+                .Select(product => new ProductIndexVM
+                {
+                    Id = product.Id,
+                    ProductName = product.ProductName,
+                    BrandId = product.BrandId,
+                    BrandName = product.Brand.BrandName,
+                    CategoryId = product.CategoryId,
+                    CategoryName = product.Category.CategoryName,
+                    Picture = product.Picture,
+                    Quantity = product.Quantity,
+                    Price = product.Price,
+                    Discount = product.Discount
+                }).ToList();
+
+            return this.View(products);
         }
 
         // GET: ProductController/Details/5
@@ -20,22 +51,40 @@ namespace BeeProductApp.Controllers
         // GET: ProductController/Create
         public ActionResult Create()
         {
-            return View();
+            var product = new ProductCreateVM();
+
+            product.Brands = _brandService.GetBrands()
+                .Select(x => new BrandPairVM()
+                {
+                    Id = x.Id,
+                    Name = x.BrandName
+                }).ToList();
+
+            product.Categories = _categoryService.GetCategories()
+                .Select(x => new CategoryPairVM()
+                {
+                    Id = x.Id,
+                    Name = x.CategoryName
+                }).ToList();
+
+            return View(product);
         }
 
-        // POST: ProductController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([FromForm] ProductCreateVM product)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                var createdId = _productService.Create(product.ProductName, product.BrandId,
+                    product.CategoryId, product.Picture,
+                    product.Quantity, product.Price, product.Discount);
+                if (createdId)
+                {
+                    return RedirectToAction(nameof(Index));
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         // GET: ProductController/Edit/5
