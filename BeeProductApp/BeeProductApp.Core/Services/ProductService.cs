@@ -4,6 +4,7 @@ using BeeProductApp.Infrastructure.Data.Domain;
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,7 @@ namespace BeeProductApp.Core.Services
             _context = context;
         }
 
-        public bool Create(string name, int brandId, int categoryId, string picture, int quantity, decimal price, decimal discount)
+        public bool Create(string name, int brandId, int categoryId, string picture, string description, int quantity, decimal price, decimal discount)
         {
             Product item = new Product
             {
@@ -26,22 +27,13 @@ namespace BeeProductApp.Core.Services
                 Brand = _context.Brands.Find(brandId),
                 Category = _context.Categories.Find(categoryId),
                 Picture = picture,
+                Desription = description,
                 Quantity = quantity,
                 Price = price,
                 Discount = discount
             };
             _context.Products.Add(item);
             return _context.SaveChanges() != 0;
-        }
-
-        public object Create(object productName, object brandId, object categoryId, object pro)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Create(object productName, object brandId, object categoryId, object picture, object quantity, object price, object discount)
-        {
-            throw new NotImplementedException();
         }
 
         public Product GetProductById(int productId)
@@ -100,7 +92,7 @@ namespace BeeProductApp.Core.Services
             return _context.SaveChanges() != 0;
         }
 
-        public bool Update(int productId, string name, int brandId, int categoryId, string picture, int quantity, decimal price, decimal discount)
+        public bool Update(int productId, string name, int brandId, int categoryId, string picture, string description, int quantity, decimal price, decimal discount)
         {
             var product = GetProductById(productId);
             if (product == default(Product))
@@ -111,6 +103,7 @@ namespace BeeProductApp.Core.Services
             product.Brand = _context.Brands.Find(brandId);
             product.Category = _context.Categories.Find(categoryId);
             product.Picture = picture;
+            product.Desription = description;
             product.Quantity = quantity; product.Price = price;
             product.Discount = discount;
             _context.Update(product);

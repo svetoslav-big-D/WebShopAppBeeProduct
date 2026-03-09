@@ -1,14 +1,15 @@
-﻿using BeeProductApp.Models.Brand;
+﻿using System.ComponentModel.DataAnnotations;
+
+using BeeProductApp.Models.Brand;
 using BeeProductApp.Models.Category;
 
-using System.ComponentModel.DataAnnotations;
-
-namespace BeeProductApp.Models.Product
+namespace WebShopApp.Models.Product
 {
-    public class ProductCreateVM
+    public class ProductEditVM
     {
         [Key]
         public int Id { get; set; }
+
         [Required]
         [MaxLength(30)]
         [Display(Name = "Product Name")]
@@ -34,11 +35,10 @@ namespace BeeProductApp.Models.Product
         [Display(Name = "Quantity")]
         public int Quantity { get; set; }
 
-        [Display(Name = "Prise")]
+        [Display(Name = "Price")]
         public decimal Price { get; set; }
 
         [Display(Name = "Discount")]
         public decimal Discount { get; set; }
-
     }
 }

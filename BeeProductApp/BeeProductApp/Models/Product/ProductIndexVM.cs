@@ -27,6 +27,9 @@ namespace BeeProductApp.Models.Product
         [Display(Name = "Picture")]
         public string Picture { get; set; } = null!;
 
+        [Display(Name = "Description")]
+        public string Description { get; set; } = null!;
+
         [Range(0, 5000)]
         [Display(Name = "Quantity")]
         public int Quantity { get; set; }
