@@ -5,6 +5,7 @@ using BeeProductApp.Models.Order;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+using System.Globalization;
 using System.Security.Claims;
 
 namespace BeeProductApp.Controllers
@@ -19,6 +20,31 @@ namespace BeeProductApp.Controllers
         {
             _productService = productService;
             _orderService = orderService;
+        }
+        // GET: OrderController
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Index()
+        {
+            // string userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            // var user = context.Users.SingleOrDefault(u => u.Id == userId);
+
+            List<OrderIndexVM> orders = _orderService.GetOrders()
+                .Select(x => new OrderIndexVM
+                {
+                    Id = x.Id,
+                    OrderDate = x.OrderDate.ToString("dd-MMM-yyyy hh:mm", CultureInfo.InvariantCulture),
+                    UserId = x.UserId,
+                    User = x.User.UserName,
+                    ProductId = x.ProductId,
+                    Product = x.Product.ProductName,
+                    Picture = x.Product.Picture,
+                    Quantity = x.Quantity,
+                    Price = x.Price,
+                    Discount = x.Discount,
+                    TotalPrice = x.TotalPrice,
+                }).ToList();
+
+            return View(orders);
         }
 
         // GET: OrderController/Create
