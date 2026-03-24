@@ -19,72 +19,72 @@
             <th>
                 @Html.DisplayNameFor(model => model.ProductName)
             </th>
-@*<th>
+            @*<th>
 @Html.DisplayNameFor(model => model.BrandId)
 </th>*@
-<th>
-@Html.DisplayNameFor(model => model.BrandName)
-</th>
-@*<th>
+            <th>
+                @Html.DisplayNameFor(model => model.BrandName)
+            </th>
+            @*<th>
 @Html.DisplayNameFor(model => model.CategoryId)
 </th>*@
-<th>
-@Html.DisplayNameFor(model => model.CategoryName)
-</th>
-<th>
-@Html.DisplayNameFor(model => model.Picture)
-</th>
-<th>
-@Html.DisplayNameFor(model => model.Description)
-</th>
-<th>
-@Html.DisplayNameFor(model => model.Quantity)
-</th>
-<th>
-@Html.DisplayNameFor(model => model.Price)
-</th>
-<th>
-@Html.DisplayNameFor(model => model.Discount)
-</th>
-</tr>
-</thead>
-<tbody>
-@foreach (var item in Model)
-{
-<tr>
-<td>
-@Html.DisplayFor(modelItem => item.ProductName)
-</td>
-@*<td>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Picture)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Discount)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                @*<td>
 @Html.DisplayFor(modelItem => item.BrandId)
 </td>*@
-<td>
-@Html.DisplayFor(modelItem => item.BrandName)
-</td>
-@*<td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BrandName)
+                </td>
+                @*<td>
 @Html.DisplayFor(modelItem => item.CategoryId)
 </td>*@
-<td>
-@Html.DisplayFor(modelItem => item.CategoryName)
-</td>
-<td>
-<img src="@Html.DisplayFor(modelItem => item.Picture)"
-alt="Image" width="100" />
-@*@Html.DisplayFor(modelItem => item.Pictute)*@
-</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.Picture)"
+                         alt="Image" width="100" />
+                    @*@Html.DisplayFor(modelItem => item.Pictute)*@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-<td>
-@Html.DisplayFor(modelItem => item.Quantity)
-</td>
-<td>
-@Html.DisplayFor(modelItem => item.Price)
-</td>
-<td>
-@Html.DisplayFor(modelItem => item.Discount) %
-</td>
-<td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discount) %
+                </td>
+                <td>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Details</a>
 
                     @if (this.User.Identity.IsAuthenticated)
