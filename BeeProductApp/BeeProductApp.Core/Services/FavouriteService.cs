@@ -30,7 +30,9 @@ namespace BeeProductApp.Core.Services
         {
             // Already in favourites? Do nothing.
             if (IsFavourite(productId, userId))
+            {
                 return false;
+            }               
 
             var product = _context.Products.Find(productId);
             if (product == null) return false;
@@ -62,9 +64,6 @@ namespace BeeProductApp.Core.Services
                 .Any(f => f.ProductId == productId && f.UserId == userId);
         }
 
-        List<Favourite> IFavouriteService.GetFavouritesByUser(string userId)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

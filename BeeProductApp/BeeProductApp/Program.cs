@@ -43,6 +43,7 @@ namespace BeeProductApp
             builder.Services.AddTransient<IProductService, ProductService>();
             builder.Services.AddTransient<IOrderService, OrderService>();
             builder.Services.AddTransient<IStatisticService, StatisticsService>();
+            builder.Services.AddTransient<IFavouriteService, FavouriteService>();
 
 
             var app = builder.Build();

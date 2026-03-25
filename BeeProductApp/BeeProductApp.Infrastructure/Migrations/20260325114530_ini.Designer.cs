@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeeProductApp.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260325103644_ini")]
+    [Migration("20260325114530_ini")]
     partial class ini
     {
         /// <inheritdoc />
