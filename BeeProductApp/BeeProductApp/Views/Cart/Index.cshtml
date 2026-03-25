@@ -1,5 +1,79 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using BeeProductApp.Controllers
+using BeeProductApp.Models.Cart
+@model CartIndexVM
 @{
+    ViewData["Title"] = "My Cart";
+}
+
+<h2 class="mb-4">🧺 My Cart</h2>
+
+@if (!Model.Items.Any())
+{
+    <div class="alert alert-info">
+        Your cart is empty.
+        <a asp-controller="Product" asp-action="Index">Browse products</a>
+    </div>
+}
+else
+{
+    <table class="table table-striped align-middle">
+        <thead class="table-warning">
+            <tr>
+                <th>Product</th>
+                <th>Unit Price</th>
+                <th>Discount</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-2">
+                            <img src="@item.Picture" alt="@item.ProductName"
+                                 style="width:50px;height:50px;object-fit:cover;" class="rounded" />
+                            @item.ProductName
+                        </div>
+                    </td>
+                    <td>@item.Price.ToString("F2") лв.</td>
+                    <td>
+                        @if (item.Discount > 0)
+                        {
+                            <span class="badge bg-warning text-dark">-@item.Discount%</span>
+                        }
+                        else
+                        {
+                            <span class="text-muted">—</span>
+                        }
+                    </td>
+                    <td>@item.Quantity</td>
+                    <td class="fw-bold">@item.TotalPrice.ToString("F2") лв.</td>
+                    <td>
+                        <form asp-controller="Cart" asp-action="Remove" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="text-end fw-bold">Grand Total:</td>
+                <td colspan="2" class="fw-bold text-danger">@Model.GrandTotal.ToString("F2") лв.</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="d-flex justify-content-end gap-3 mt-3">
+        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary">Continue Shopping</a>
+        <form asp-controller="Cart" asp-action="Checkout" method="post">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-success">✅ Place Order</button>
+        </form>
+    </div>
 }
