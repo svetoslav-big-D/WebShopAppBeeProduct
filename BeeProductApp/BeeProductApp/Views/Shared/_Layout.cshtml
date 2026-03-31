@@ -25,6 +25,9 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">За нас</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Favourite" asp-action="Index">Любуми</a>
+                        </li>
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Продукти</a>
@@ -32,13 +35,13 @@
                         <li class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                Products
+                                Продукти
                             </button>
 
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li>
-                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-searchStringBrandName="GHoney">GHoney</a>
-                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-searchStringBrandName="КошерЪ">КошерЪ</a>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-searchStringBrandName="GHoney">BeeKeeper</a>
+                                    <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-searchStringBrandName="КошерЪ">BeeKeeperPremium</a>
                                    
                                 </li>
                             </ul>
@@ -46,7 +49,7 @@
                         @if (this.User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="MyOrders">Мойта поръчка</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="MyOrders">Моята поръчка</a>
                             </li>
                         }
 

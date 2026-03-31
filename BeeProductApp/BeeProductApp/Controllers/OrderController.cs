@@ -64,6 +64,7 @@ namespace BeeProductApp.Controllers
             };
             return View(order);
         }
+
         // POST: OrderController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
