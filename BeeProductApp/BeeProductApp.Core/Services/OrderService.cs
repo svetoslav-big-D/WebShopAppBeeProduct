@@ -66,7 +66,9 @@ namespace BeeProductApp.Core.Services
 
         public List<Order> GetOrdersByUser(string userId)
         {
-            throw new NotImplementedException();
+            return _context.Orders.Where(x => x.UserId == userId)
+          .OrderByDescending(x => x.OrderDate)
+          .ToList();
         }
 
         public bool RemoveById(int orderId)

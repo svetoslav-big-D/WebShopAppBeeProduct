@@ -1,4 +1,4 @@
-﻿namespace BeeProductApp.Controllers
+﻿namespace BeeProductApp.Models.Cart
 {
     internal class CartItemVM
     {

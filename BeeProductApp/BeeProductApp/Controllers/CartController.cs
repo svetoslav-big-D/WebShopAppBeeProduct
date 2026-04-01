@@ -1,4 +1,5 @@
 ﻿using BeeProductApp.Core.Contracts;
+using BeeProductApp.Models.Cart;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
