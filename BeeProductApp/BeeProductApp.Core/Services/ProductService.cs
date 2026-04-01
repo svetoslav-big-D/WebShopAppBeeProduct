@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -110,6 +111,14 @@ namespace BeeProductApp.Core.Services
             return _context.SaveChanges() != 0;
         }
 
+        public List<Product> GetTop3Products()
+        {
+            return _context.Orders
+                .GroupBy(o => o.ProductId)
+                .Take(3)
+                .Select(g => g.First().Product)
+                .ToList();
+        }
 
     }
 }

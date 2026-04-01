@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<BeeProductApp.Models.Product.ProductIndexVM>
+@{
     ViewData["Title"] = "Начало";
 }
 
@@ -110,9 +111,9 @@
             <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38" width="150" height="150">
             <h5>
                 <a asp-controller="Product"
-                    asp-action="Index"
-                    asp-route-searchStringCategoryName="Мед"
-                    class="btn btn-warning">
+                   asp-action="Index"
+                   asp-route-searchStringCategoryName="Мед"
+                   class="btn btn-warning">
                     Мед
                 </a>
             </h5>
@@ -125,33 +126,32 @@
                    asp-action="Index"
                    asp-route-searchStringCategoryName="Пчелен прашец"
                    class="btn btn-warning">
-                   Пчелен прашец
+                    Пчелен прашец
                 </a>
             </h5>
         </div>
 
         <div class="card">
             <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5" width="150" height="150">
-           
+
             <h5>
                 <a asp-controller="Product"
                    asp-action="Index"
                    asp-route-searchStringCategoryName="Прополис"
                    class="btn btn-warning">
-                   Прополис
+                    Прополис
                 </a>
             </h5>
         </div>
 
         <div class="card">
             <img src="https://images.unsplash.com/photo-1620219365994-f443a86a0b09" width="150" height="150">
-            <h5>Пчелен восък</h5>
             <h5>
                 <a asp-controller="Product"
                    asp-action="Index"
                    asp-route-searchStringCategoryName="Пчелен восък"
                    class="btn btn-warning">
-                   Пчелен восък
+                    Пчелен восък
                 </a>
             </h5>
         </div>
@@ -162,15 +162,16 @@
 <div class="section">
     <h2>Най-продавани</h2>
     <div class="grid">
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1606312619349-9b6c0b0c7e5c">
-            <h5>Акациев мед</h5>
-            <div class="price">18.00 лв.</div>
-            <button>Добави в количката</button>
-        </div>
-
-        <div class="card">
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <img src="">
+                <h5> @Html.DisplayFor(modelItem => item.ProductName)</h5>
+                <div class="price">@Html.DisplayFor(modelItem => item.Price)</div>
+                <button>Добави в количката</button>
+            </div>
+        }
+        @* <div class="card">
             <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38">
             <h5>Букетен мед</h5>
             <div class="price">16.00 лв.</div>
@@ -182,7 +183,7 @@
             <h5>Пчелен прашец</h5>
             <div class="price">12.00 лв.</div>
             <button>Добави в количката</button>
-        </div>
+        </div> *@
 
     </div>
 </div>

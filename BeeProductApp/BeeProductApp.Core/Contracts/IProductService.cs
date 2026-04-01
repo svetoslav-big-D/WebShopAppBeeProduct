@@ -18,6 +18,8 @@ namespace BeeProductApp.Core.Contracts
         Product GetProductById(int productId);
         bool RemoveById(int dogproductId);
         List<Product> GetProducts(string searchStringCategoryName, string searchStringBrandName);
+
+        List<Product> GetTop3Products();
         
     }
 }
