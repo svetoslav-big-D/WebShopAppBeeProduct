@@ -1,68 +1,259 @@
 ﻿@model BeeProductApp.Models.Product.ProductDetailsVM
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Детайли";
 }
-<h1>Details</h1>
-<div>
-    <h4>ProductDetailsVM</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProductName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ProductName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.BrandName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.BrandName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CategoryName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Picture)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="@Html.DisplayFor(model => model.Picture)" alt="Image"
-                 width="100" />
-            @*@Html.DisplayFor(model => model.Picture)*@
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Quantity)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Quantity)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Discount)
-        </dt>
-        <dd class="col-sm-10">
-@Html.DisplayFor(model => model.Discount)
-        </dd>
-    </dl>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'DM Sans', sans-serif;
+        background: #FFF8EE;
+        color: #1a1008;
+    }
+
+    .back-link {
+        font-size: 13px;
+        color: #BA7517;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 28px;
+    }
+
+        .back-link:hover {
+            color: #854F0B;
+            text-decoration: none;
+        }
+
+    .details-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        margin-bottom: 60px;
+        background: white;
+        border: 1px solid #e8d5b0;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .details-img-side {
+        min-height: 360px;
+        overflow: hidden;
+        background: #FAEEDA;
+    }
+
+        .details-img-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+    .details-text-side {
+        padding: 48px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .details-eyebrow {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #854F0B;
+        margin-bottom: 10px;
+    }
+
+    .details-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 30px;
+        color: #412402;
+        margin-bottom: 6px;
+        line-height: 1.2;
+    }
+
+    .details-meta {
+        font-size: 13px;
+        color: #854F0B;
+        margin-bottom: 20px;
+    }
+
+    .details-price {
+        font-family: 'Playfair Display', serif;
+        font-size: 28px;
+        color: #BA7517;
+        margin-bottom: 6px;
+    }
+
+    .details-discount {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 500;
+        background: #FAEEDA;
+        color: #854F0B;
+        padding: 4px 10px;
+        border-radius: 20px;
+        margin-bottom: 20px;
+    }
+
+    .details-divider {
+        border: none;
+        border-top: 1px solid #e8d5b0;
+        margin: 20px 0;
+    }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #f0e4cc;
+    }
+
+        .info-row:last-of-type {
+            border-bottom: none;
+        }
+
+    .info-key {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #854F0B;
+    }
+
+    .info-val {
+        font-size: 14px;
+        color: #412402;
+        font-weight: 500;
+    }
+
+    .details-desc {
+        font-size: 14px;
+        color: #633806;
+        line-height: 1.8;
+        margin: 20px 0;
+    }
+
+    .details-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 24px;
+        flex-wrap: wrap;
+    }
+
+    .btn-primary {
+        background: #412402;
+        color: #FAC775;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .btn-primary:hover {
+            background: #633806;
+            color: #FAC775;
+            text-decoration: none;
+        }
+
+    .btn-outline {
+        background: white;
+        color: #412402;
+        border: 1px solid #e8d5b0;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: border-color 0.2s, background 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .btn-outline:hover {
+            border-color: #BA7517;
+            background: #FAEEDA;
+            text-decoration: none;
+            color: #412402;
+        }
+
+    .btn-edit-admin {
+        background: #FAEEDA;
+        color: #633806;
+        border: 1px solid #e8d5b0;
+        padding: 12px 24px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: border-color 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+        .btn-edit-admin:hover {
+            border-color: #BA7517;
+            text-decoration: none;
+            color: #633806;
+        }
+</style>
+
+<a asp-action="Index" class="back-link">← Обратно към продуктите</a>
+
+<div class="details-layout">
+    <div class="details-img-side">
+        <img src="@Html.DisplayFor(model => model.Picture)" alt="@Model.ProductName" />
+    </div>
+    <div class="details-text-side">
+        <div class="details-eyebrow">@Html.DisplayFor(model => model.CategoryName)</div>
+        <h1 class="details-name">@Html.DisplayFor(model => model.ProductName)</h1>
+        <div class="details-meta">@Html.DisplayFor(model => model.BrandName)</div>
+
+        <div class="details-price">@Html.DisplayFor(model => model.Price) лв.</div>
+        @if (Model.Discount > 0)
+        {
+            <div class="details-discount">Отстъпка: @Html.DisplayFor(model => model.Discount)%</div>
+        }
+
+        <p class="details-desc">@Html.DisplayFor(model => model.Description)</p>
+
+        <hr class="details-divider" />
+
+        <div class="info-row">
+            <span class="info-key">Наличност</span>
+            <span class="info-val">@Html.DisplayFor(model => model.Quantity) бр.</span>
+        </div>
+
+        <div class="details-actions">
+            @if (this.User.Identity.IsAuthenticated)
+            {
+                <a asp-action="Create" asp-controller="Order" asp-route-id="@Model.Id" class="btn-primary">Поръчай сега</a>
+            }
+            <a asp-action="Index" class="btn-outline">Всички продукти</a>
+            @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
+            {
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-edit-admin">✏️ Редактирай</a>
+            }
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

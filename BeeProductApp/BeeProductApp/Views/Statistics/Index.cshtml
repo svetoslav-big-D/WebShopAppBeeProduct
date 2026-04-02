@@ -1,30 +1,130 @@
 ﻿@using BeeProductApp.Models.Statistic
 @model StatisticVM
 @{
-    ViewData["Title"] = "Statistics";
+    ViewData["Title"] = "Статистика";
 }
 
-<h4 class="text-center">Statistic</h4>
-<div class="text-center">
-    <div class="col-xl-8">
-        <table class="table table-striped" style="width:150%">
-            <thead>
-                <tr>
-                    <th>@Html.DisplayNameFor(model => model.CountClients)</th>
-                    <th>@Html.DisplayNameFor(model => model.CountProducts)</th>
-                    <th>@Html.DisplayNameFor(model => model.CountOrders)</th>
-                    <th>@Html.DisplayNameFor(model => model.SumOrders)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>@Html.DisplayFor(model => model.CountClients)</td>
-                    <td>@Html.DisplayFor(model => model.CountProducts)</td>
-                    <td>@Html.DisplayFor(model => model.CountOrders)</td>
-                    <td>@Html.DisplayFor(model => model.SumOrders)</td>
-                </tr>
-            </tbody>
-        </table>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'DM Sans', sans-serif;
+        background: #FFF8EE;
+        color: #1a1008;
+    }
+
+    /* ── HEADER ── */
+    .page-eyebrow {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #854F0B;
+        margin-bottom: 12px;
+    }
+
+    .page-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 38px;
+        color: #412402;
+        margin-bottom: 8px;
+        line-height: 1.2;
+    }
+
+        .page-title em {
+            font-style: italic;
+            color: #BA7517;
+        }
+
+    .page-subtitle {
+        font-size: 14px;
+        color: #854F0B;
+        margin-bottom: 40px;
+    }
+
+    /* ── STATS GRID ── */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+        margin-bottom: 60px;
+    }
+
+    .stat-card {
+        background: white;
+        border: 1px solid #e8d5b0;
+        border-radius: 16px;
+        padding: 32px 24px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(65, 36, 2, 0.05);
+            border-color: #BA7517;
+        }
+
+    .stat-icon {
+        font-size: 36px;
+        margin-bottom: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: #FAEEDA;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        border: 1px solid #e8d5b0;
+    }
+
+    .stat-value {
+        font-family: 'Playfair Display', serif;
+        font-size: 42px;
+        color: #BA7517;
+        margin-bottom: 8px;
+        line-height: 1;
+    }
+
+    .stat-label {
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        color: #854F0B;
+    }
+</style>
+
+<div class="page-eyebrow">Общ преглед</div>
+<h1 class="page-title">Бизнес <em>статистика</em></h1>
+<p class="page-subtitle">Актуални данни за развитието на BeeKeeper</p>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-value">@Html.DisplayFor(model => model.CountClients)</div>
+        <div class="stat-label">@Html.DisplayNameFor(model => model.CountClients)</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">🍯</div>
+        <div class="stat-value">@Html.DisplayFor(model => model.CountProducts)</div>
+        <div class="stat-label">@Html.DisplayNameFor(model => model.CountProducts)</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-value">@Html.DisplayFor(model => model.CountOrders)</div>
+        <div class="stat-label">@Html.DisplayNameFor(model => model.CountOrders)</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-icon">📈</div>
+        <div class="stat-value">@Model.SumOrders.ToString("F2") лв.</div>
+        <div class="stat-label">@Html.DisplayNameFor(model => model.SumOrders)</div>
     </div>
 </div>
-

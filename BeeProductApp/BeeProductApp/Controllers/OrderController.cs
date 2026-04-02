@@ -21,6 +21,7 @@ namespace BeeProductApp.Controllers
             _productService = productService;
             _orderService = orderService;
         }
+
         // GET: OrderController
         [Authorize(Roles = "Administrator")]
         public ActionResult Index()
@@ -81,11 +82,14 @@ namespace BeeProductApp.Controllers
             if (ModelState.IsValid)
             {
                 _orderService.Create(bindingModel.ProductId, currentUserId, bindingModel.Quantity);
-                return RedirectToAction("Index", "Product");
+
+                // ПРОМЯНАТА Е ТУК: Пренасочваме към CheckoutSuccess в CartController
+                return RedirectToAction("CheckoutSuccess", "Cart");
             }
 
             return View(bindingModel);
         }
+
         public ActionResult Denied()
         {
             return View();
@@ -113,9 +117,5 @@ namespace BeeProductApp.Controllers
                 }).ToList();
             return View(orders);
         }
-
-
-
-
     }
 }

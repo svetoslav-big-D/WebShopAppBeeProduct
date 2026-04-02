@@ -3,92 +3,183 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BeeKeeper </title>
+    <title>@ViewData["Title"] - BeeKeeper</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BeeProductApp.styles.css" asp-append-version="true" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: #FFF8EE;
+            color: #1a1008;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ── NAVBAR ── */
+        .custom-navbar {
+            background-color: #FFFDF8 !important;
+            border-bottom: 1px solid #e8d5b0 !important;
+            box-shadow: 0 4px 12px rgba(65, 36, 2, 0.03) !important;
+            padding: 12px 0;
+        }
+
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: #412402 !important;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link {
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #854F0B !important;
+            transition: color 0.2s ease-in-out;
+            padding: 8px 16px !important;
+        }
+
+            .nav-link:hover, .nav-link:focus {
+                color: #BA7517 !important;
+            }
+
+        /* ── DROPDOWNS ── */
+        .dropdown-menu {
+            background-color: #FFFDF8;
+            border: 1px solid #e8d5b0;
+            border-radius: 12px;
+            box-shadow: 0 10px 24px rgba(65, 36, 2, 0.08);
+            padding: 8px 0;
+            margin-top: 8px;
+        }
+
+        .dropdown-item {
+            font-size: 14px;
+            font-weight: 500;
+            color: #412402;
+            padding: 10px 20px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+            .dropdown-item:hover, .dropdown-item:focus {
+                background-color: #FAEEDA;
+                color: #BA7517;
+            }
+
+        /* ── FOOTER ── */
+        main {
+            flex: 1;
+        }
+
+        .custom-footer {
+            background-color: #FFFDF8;
+            border-top: 1px solid #e8d5b0 !important;
+            color: #854F0B !important;
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+            .custom-footer a {
+                color: #BA7517;
+                text-decoration: none;
+                transition: color 0.2s;
+            }
+
+                .custom-footer a:hover {
+                    color: #412402;
+                }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm custom-navbar mb-4">
+            <div class="container-fluid container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BeeKeeper</a>
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1 align-items-center">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Начало</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">За нас</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">За нас</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Favourite" asp-action="Index">Любими</a>
+                            <a class="nav-link" asp-area="" asp-controller="Favourite" asp-action="Index">Любими</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Index">Количка</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Продукти</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Продукти</a>
-                        </li>
-                        <li class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                Продукти
-                            </button>
-
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="brandsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Марки
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="brandsDropdown">
                                 <li>
                                     <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-searchStringBrandName="GHoney">BeeKeeper</a>
+                                </li>
+                                <li>
                                     <a class="dropdown-item" asp-controller="Product" asp-action="Index" asp-route-searchStringBrandName="КошерЪ">BeeKeeperPremium</a>
-                                   
                                 </li>
                             </ul>
                         </li>
+
                         @if (this.User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="MyOrders">Моята поръчка</a>
+                                <a class="nav-link" asp-area="" asp-controller="Order" asp-action="MyOrders">Моите поръчки</a>
                             </li>
                         }
 
                         @if (this.User.Identity.IsAuthenticated && this.User.IsInRole("Administrator"))
                         {
-                            <li class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle"
-                                        type="button"
-                                        id="dropdownMenuButton1"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                    Статистика
-                                </button>
-
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="/Client/Index">Клиенти</a></li>
-                                    <li><a class="dropdown-item" href="/Order/Index">Поръчки</a></li>
-                                    <li><a class="dropdown-item" href="/Statistics/Index">Статистика</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Администрация
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="adminDropdown">
+                                    <li><a class="dropdown-item" asp-controller="Client" asp-action="Index">👥 Клиенти</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="Index">📦 Всички Поръчки</a></li>
+                                    <li><a class="dropdown-item" asp-controller="Statistics" asp-action="Index">📈 Статистика</a></li>
                                 </ul>
                             </li>
                         }
-
                     </ul>
+
                     <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
     </header>
+
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-5">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="custom-footer text-center">
         <div class="container">
-            &copy; 2026 - BeeKeeper - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2026 - BeeKeeper - <a asp-area="" asp-controller="Home" asp-action="Privacy">За нас</a> | Доставяме 100% истински мед.
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

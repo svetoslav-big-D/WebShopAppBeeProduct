@@ -1,115 +1,414 @@
 ﻿@model IEnumerable<BeeProductApp.Models.Product.ProductIndexVM>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Продукти";
 }
-<h1>Index</h1>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<form asp-controller="Product" asp-action="Index" method="get">
-    <p>
-        Brand: <input type="text" name="SearchStringBrandName" />
-        Category: <input type="text" name="SearchStringCategoryName" />
-        <input type="submit" value="Filter" />
-    </p>
-</form>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProductName)
-            </th>
-            @*<th>
-@Html.DisplayNameFor(model => model.BrandId)
-</th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.BrandName)
-            </th>
-            @*<th>
-@Html.DisplayNameFor(model => model.CategoryId)
-</th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Picture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Discount)
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProductName)
-                </td>
-                @*<td>
-@Html.DisplayFor(modelItem => item.BrandId)
-</td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.BrandName)
-                </td>
-                @*<td>
-@Html.DisplayFor(modelItem => item.CategoryId)
-</td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryName)
-                </td>
-                <td>
-                    <img src="@Html.DisplayFor(modelItem => item.Picture)"
-                         alt="Image" width="100" />
-                    @*@Html.DisplayFor(modelItem => item.Pictute)*@
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Discount) %
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success">Details</a>
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'DM Sans', sans-serif;
+        background: #FFF8EE;
+        color: #1a1008;
+    }
+
+    .page-eyebrow {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #854F0B;
+        margin-bottom: 12px;
+    }
+
+    .page-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 38px;
+        color: #412402;
+        margin-bottom: 8px;
+        line-height: 1.2;
+    }
+
+        .page-title em {
+            font-style: italic;
+            color: #BA7517;
+        }
+
+    .page-subtitle {
+        font-size: 14px;
+        color: #854F0B;
+        margin-bottom: 32px;
+    }
+
+    .filter-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: white;
+        border: 1px solid #e8d5b0;
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 32px;
+        flex-wrap: wrap;
+    }
+
+    .filter-label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: #854F0B;
+        white-space: nowrap;
+    }
+
+    .filter-input {
+        padding: 9px 14px;
+        border: 1px solid #e8d5b0;
+        border-radius: 6px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 13px;
+        color: #412402;
+        background: #FFFDF8;
+        outline: none;
+        flex: 1;
+        min-width: 140px;
+        transition: border-color 0.2s;
+    }
+
+        .filter-input:focus {
+            border-color: #EF9F27;
+        }
+
+    .filter-btn {
+        background: #412402;
+        color: #FAC775;
+        border: none;
+        padding: 9px 20px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+        white-space: nowrap;
+    }
+
+        .filter-btn:hover {
+            background: #633806;
+        }
+
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 22px;
+        color: #412402;
+    }
+
+    .btn-create {
+        background: #412402;
+        color: #FAC775;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+
+        .btn-create:hover {
+            background: #633806;
+            color: #FAC775;
+            text-decoration: none;
+        }
+
+    .products-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-bottom: 60px;
+    }
+
+    .prod-card {
+        background: white;
+        border: 1px solid #e8d5b0;
+        border-radius: 14px;
+        width: 220px;
+        overflow: hidden;
+        transition: border-color 0.2s, transform 0.2s;
+    }
+
+        .prod-card:hover {
+            border-color: #EF9F27;
+            transform: translateY(-2px);
+        }
+
+    .prod-img-wrap {
+        height: 150px;
+        overflow: hidden;
+        background: #FAEEDA;
+    }
+
+        .prod-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+    .prod-body {
+        padding: 14px;
+    }
+
+    .prod-name {
+        font-size: 14px;
+        font-weight: 500;
+        color: #412402;
+        margin-bottom: 2px;
+    }
+
+    .prod-meta {
+        font-size: 11px;
+        color: #854F0B;
+        margin-bottom: 6px;
+    }
+
+    .prod-desc {
+        font-size: 12px;
+        color: #633806;
+        line-height: 1.5;
+        margin-bottom: 8px;
+        max-height: 48px;
+        overflow: hidden;
+    }
+
+    .prod-footer-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .prod-price {
+        font-family: 'Playfair Display', serif;
+        font-size: 17px;
+        color: #BA7517;
+    }
+
+    .prod-discount {
+        font-size: 11px;
+        font-weight: 500;
+        background: #FAEEDA;
+        color: #854F0B;
+        padding: 3px 8px;
+        border-radius: 20px;
+    }
+
+    .prod-actions {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+
+    .btn-details {
+        flex: 1;
+        background: #412402;
+        color: #FAC775;
+        border: none;
+        padding: 7px 0;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+        text-decoration: none;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .btn-details:hover {
+            background: #633806;
+            color: #FAC775;
+            text-decoration: none;
+        }
+
+    .btn-order {
+        flex: 1;
+        background: white;
+        color: #412402;
+        border: 1px solid #e8d5b0;
+        padding: 7px 0;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+        text-decoration: none;
+        transition: border-color 0.2s, background 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .btn-order:hover {
+            border-color: #BA7517;
+            background: #FAEEDA;
+            text-decoration: none;
+            color: #412402;
+        }
+
+    .btn-fav {
+        background: white;
+        color: #854F0B;
+        border: 1px solid #e8d5b0;
+        padding: 7px 10px;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: border-color 0.2s, background 0.2s;
+    }
+
+        .btn-fav:hover {
+            border-color: #BA7517;
+            background: #FAEEDA;
+        }
+
+    .admin-actions {
+        display: flex;
+        gap: 6px;
+        margin-top: 6px;
+    }
+
+    .btn-edit {
+        flex: 1;
+        background: #FAEEDA;
+        color: #633806;
+        border: 1px solid #e8d5b0;
+        padding: 6px 0;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 500;
+        text-align: center;
+        text-decoration: none;
+        transition: border-color 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .btn-edit:hover {
+            border-color: #BA7517;
+            text-decoration: none;
+            color: #633806;
+        }
+
+    .btn-delete {
+        flex: 1;
+        background: #fde8e8;
+        color: #7a1f1f;
+        border: 1px solid #f5c6c6;
+        padding: 6px 0;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 500;
+        text-align: center;
+        text-decoration: none;
+        transition: border-color 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .btn-delete:hover {
+            border-color: #7a1f1f;
+            text-decoration: none;
+            color: #7a1f1f;
+        }
+
+    .fav-form {
+        margin: 0;
+    }
+</style>
+
+<div class="page-eyebrow">Пчелин Кралевдол</div>
+<h1 class="page-title">Всички <em>продукти</em></h1>
+<p class="page-subtitle">Натурални пчелни продукти директно от нашия пчелин</p>
+
+<form asp-controller="Product" asp-action="Index" method="get">
+    <div class="filter-bar">
+        <span class="filter-label">Марка</span>
+        <input type="text" name="SearchStringBrandName" class="filter-input" placeholder="Търси по марка..." />
+        <span class="filter-label">Категория</span>
+        <input type="text" name="SearchStringCategoryName" class="filter-input" placeholder="Търси по категория..." />
+        <button type="submit" class="filter-btn">Филтрирай</button>
+    </div>
+</form>
+
+<div class="top-bar">
+    <h2 class="section-title">Продукти (@Model.Count())</h2>
+    @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
+    {
+        <a asp-action="Create" class="btn-create">+ Добави продукт</a>
+    }
+</div>
+
+<div class="products-grid">
+    @foreach (var item in Model)
+    {
+        <div class="prod-card">
+            <div class="prod-img-wrap">
+                <img src="@item.Picture" alt="@item.ProductName" />
+            </div>
+            <div class="prod-body">
+                <div class="prod-name">@Html.DisplayFor(modelItem => item.ProductName)</div>
+                <div class="prod-meta">@Html.DisplayFor(modelItem => item.BrandName) · @Html.DisplayFor(modelItem => item.CategoryName)</div>
+                <div class="prod-desc">@Html.DisplayFor(modelItem => item.Description)</div>
+                <div class="prod-footer-top">
+                    <div class="prod-price">@Html.DisplayFor(modelItem => item.Price) лв.</div>
+                    @if (item.Discount > 0)
+                    {
+                        <div class="prod-discount">-@Html.DisplayFor(modelItem => item.Discount)%</div>
+                    }
+                </div>
+                <div class="prod-actions">
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn-details">Детайли</a>
                     @if (this.User.Identity.IsAuthenticated)
                     {
-                        <a asp-action="Create" asp-controller="Order" asp-route-id="@item.Id" class="btn btn-primary">Order</a>
-                        <form asp-controller="Favourite" asp-action="Add" method="post">
-                           
+                        <a asp-action="Create" asp-controller="Order" asp-route-id="@item.Id" class="btn-order">Поръчай</a>
+                        <form asp-controller="Favourite" asp-action="Add" method="post" class="fav-form">
                             <input type="hidden" name="productId" value="@item.Id" />
-                            
-                            <button type="submit" class="btn btn-outline-danger" title="Add to Favourites">
-                                ❤️
-                            </button>
+                            <button type="submit" class="btn-fav" title="Добави в любими">Добави в любими</button>
                         </form>
                     }
-
-                    @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
+                    @if (this.User.Identity.IsAuthenticated)
                     {
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                        <form asp-controller="Cart" asp-action="Add" method="post" class="fav-form">
+                            <input type="hidden" name="productId" value="@item.Id" />
+                            <button type="submit" class="btn-fav" title="Добави в количката">Добави в количката</button>
+                        </form>
                     }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                </div>
+                @if ((this.User.Identity.IsAuthenticated) && (this.User.IsInRole("Administrator")))
+                {
+                    <div class="admin-actions">
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-edit">Редактирай</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-delete">Изтрий</a>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

@@ -1,34 +1,79 @@
-﻿
-@model IEnumerable<BeeProductApp.Models.Client.ClientIndexVM>
+﻿@model IEnumerable<BeeProductApp.Models.Client.ClientIndexVM>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Клиенти";
 }
 
-<h1>Clients</h1>
-<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.UserName)</th>
-            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
-            <th>@Html.DisplayNameFor(model => model.LastName)</th>
-            <th>@Html.DisplayNameFor(model => model.Address)</th>
-            <th>@Html.DisplayNameFor(model => model.Email)</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.UserName)</td>
-                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
-                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
-                <td>@Html.DisplayFor(modelItem => item.Address)</td>
-                <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                <td>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
-                </td>
-            </tr>
+<style>
+    .clients-card {
+        background: white;
+        border: 1px solid #e8d5b0;
+        border-radius: 16px;
+        overflow: hidden;
+        margin-top: 20px;
+    }
+
+    .table thead {
+        background: #FAEEDA;
+        color: #854F0B;
+        border-bottom: 1px solid #e8d5b0;
+    }
+
+    .table th {
+        font-family: 'DM Sans', sans-serif;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 1px;
+        padding: 15px;
+    }
+
+    .table td {
+        padding: 15px;
+        vertical-align: middle;
+        color: #412402;
+        border-bottom: 1px solid #f2e6d0;
+    }
+
+    .btn-delete {
+        color: #dc3545;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+        .btn-delete:hover {
+            text-decoration: underline;
         }
-    </tbody>
-</table>
+</style>
+
+<div class="container mt-5">
+    <h2 style="font-family: 'Playfair Display', serif; color: #412402;">Управление на клиенти</h2>
+    <div class="clients-card shadow-sm">
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th>Потребител</th>
+                    <th>Име</th>
+                    <th>Фамилия</th>
+                    <th>Адрес</th>
+                    <th>Имейл</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td style="font-weight: 500;">@item.UserName</td>
+                        <td>@item.FirstName</td>
+                        <td>@item.LastName</td>
+                        <td style="font-size: 13px;">@item.Address</td>
+                        <td>@item.Email</td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn-delete">Изтрий</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

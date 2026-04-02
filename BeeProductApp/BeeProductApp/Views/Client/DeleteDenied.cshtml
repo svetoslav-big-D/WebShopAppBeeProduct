@@ -1,9 +1,18 @@
 ﻿@{
-    ViewData["Title"] = "Denied";
+    ViewData["Title"] = "Отказан достъп";
 }
 
-<h1>You can  not delete this user!</h1>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 
-<div>
-    <a asp-controller="Client" asp-action="Index">Back to list of clients</a>
+<div class="container text-center" style="margin-top: 80px; max-width: 550px;">
+    <div style="background: white; border: 1px solid #e8d5b0; border-radius: 20px; padding: 50px 30px; box-shadow: 0 4px 15px rgba(65, 36, 2, 0.05);">
+        <div style="font-size: 50px; margin-bottom: 20px;">🚫</div>
+        <h2 style="font-family: 'Playfair Display', serif; color: #412402; margin-bottom: 15px;">Действието е отказано</h2>
+        <p style="font-family: 'DM Sans', sans-serif; color: #633806; margin-bottom: 30px; line-height: 1.6;">
+            Не можете да изтриете този потребител. Възможно е профилът да е защитен или да е свързан с активни данни в системата.
+        </p>
+        <a asp-controller="Client" asp-action="Index" class="btn" style="border: 1px solid #BA7517; color: #BA7517; border-radius: 8px; padding: 12px 35px; text-decoration: none; display: inline-block; transition: 0.3s;">
+            Върни се към списъка с клиенти
+        </a>
+    </div>
 </div>

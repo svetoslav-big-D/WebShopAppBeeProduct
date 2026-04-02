@@ -3,217 +3,443 @@
     ViewData["Title"] = "Начало";
 }
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
 <style>
-    .hero {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 80px 20px;
-        background: linear-gradient(135deg, #FDE68A, #F59E0B);
-        color: white;
-        border-radius: 15px;
+    * {
+        box-sizing: border-box;
     }
 
-    .hero-text {
-        max-width: 500px;
+    body {
+        font-family: 'DM Sans', sans-serif;
+        background: #FFF8EE;
+        color: #1a1008;
+    }
+
+    /* ── HERO ── */
+    .hero {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 420px;
+        border-radius: 16px;
+        overflow: hidden;
+        margin-bottom: 0;
+    }
+
+    .hero-left {
+        background: #FAEEDA;
+        padding: 60px 48px 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .hero-eyebrow {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #854F0B;
+        margin-bottom: 16px;
     }
 
     .hero h1 {
-        font-size: 42px;
+        font-family: 'Playfair Display', serif;
+        font-size: 38px;
+        line-height: 1.2;
+        color: #412402;
+        margin-bottom: 16px;
+    }
+
+        .hero h1 em {
+            font-style: italic;
+            color: #BA7517;
+        }
+
+    .hero-sub {
+        font-size: 15px;
+        color: #633806;
+        line-height: 1.7;
+        margin-bottom: 32px;
+        max-width: 340px;
+    }
+
+    .hero-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #412402;
+        color: #FAC775;
+        border: none;
+        padding: 14px 28px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        width: fit-content;
+        transition: background 0.2s;
+    }
+
+        .hero-btn:hover {
+            background: #633806;
+            color: #FAC775;
+            text-decoration: none;
+        }
+
+    .hero-right {
+        position: relative;
+        overflow: hidden;
+    }
+
+        .hero-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+    .hero-badge {
+        position: absolute;
+        bottom: 24px;
+        right: 24px;
+        background: #412402;
+        color: #FAC775;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 10px 18px;
+        border-radius: 20px;
+        letter-spacing: 0.5px;
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+        display: flex;
+        border: 1px solid #e8d5b0;
+        border-radius: 12px;
+        margin: 32px 0;
+        overflow: hidden;
+        background: white;
+    }
+
+    .stat-item {
+        flex: 1;
+        padding: 24px;
+        text-align: center;
+        border-right: 1px solid #e8d5b0;
+    }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+    .stat-num {
+        font-family: 'Playfair Display', serif;
+        font-size: 30px;
+        color: #BA7517;
+        line-height: 1;
+    }
+
+    .stat-label {
+        font-size: 12px;
+        color: #854F0B;
+        margin-top: 6px;
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
         margin-bottom: 20px;
     }
 
-    .hero button {
-        background: #D97706;
-        border: none;
-        padding: 12px 22px;
-        border-radius: 8px;
-        color: white;
+    .section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 26px;
+        color: #412402;
     }
 
-    .hero img {
-        width: 350px;
-        border-radius: 20px;
+    .see-all {
+        font-size: 13px;
+        color: #BA7517;
+        text-decoration: none;
     }
 
-    .section {
-        margin-top: 60px;
+        .see-all:hover {
+            color: #854F0B;
+            text-decoration: underline;
+        }
+
+    /* ── CATEGORIES ── */
+    .categories-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin-bottom: 52px;
+    }
+
+    .cat-card {
+        background: white;
+        border: 1px solid #e8d5b0;
+        border-radius: 14px;
+        overflow: hidden;
+        text-decoration: none;
+        transition: border-color 0.2s, transform 0.2s;
+        display: block;
+    }
+
+        .cat-card:hover {
+            border-color: #EF9F27;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .cat-card img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            display: block;
+        }
+
+    .cat-name {
+        padding: 12px 16px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #412402;
         text-align: center;
     }
 
-    .grid {
+    /* ── BEST SELLERS ── */
+    .products-grid {
         display: flex;
-        gap: 20px;
-        justify-content: center;
+        gap: 16px;
         flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 52px;
     }
 
-    .card {
+    .prod-card {
         background: white;
-        padding: 20px;
-        border-radius: 15px;
+        border: 1px solid #e8d5b0;
+        border-radius: 14px;
         width: 220px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        overflow: hidden;
+        transition: border-color 0.2s, transform 0.2s;
     }
 
-        .card img {
-            width: 100%;
-            border-radius: 10px;
+        .prod-card:hover {
+            border-color: #EF9F27;
+            transform: translateY(-2px);
         }
 
-    .price {
-        color: #D97706;
-        font-weight: bold;
-        margin: 10px 0;
-    }
-
-    .card button {
-        background: #F59E0B;
-        border: none;
-        padding: 10px;
-        border-radius: 8px;
-        color: white;
-        width: 100%;
-    }
-
-    .about {
+    .prod-img-wrap {
+        background: #FAEEDA;
+        height: 150px;
         display: flex;
-        gap: 30px;
-        margin-top: 60px;
         align-items: center;
+        justify-content: center;
+        overflow: hidden;
     }
 
-        .about img {
-            width: 50%;
-            border-radius: 15px;
+        .prod-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-    .about-text {
-        width: 50%;
+    .prod-body {
+        padding: 14px;
+    }
+
+    .prod-name {
+        font-size: 14px;
+        font-weight: 500;
+        color: #412402;
+        margin-bottom: 4px;
+    }
+
+    .prod-origin {
+        font-size: 11px;
+        color: #854F0B;
+        margin-bottom: 12px;
+    }
+
+    .prod-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .prod-price {
+        font-family: 'Playfair Display', serif;
+        font-size: 17px;
+        color: #BA7517;
+    }
+
+    .prod-btn {
+        font-size: 12px;
+        font-weight: 500;
+        background: #412402;
+        color: #FAC775;
+        border: none;
+        padding: 7px 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+        .prod-btn:hover {
+            background: #633806;
+        }
+
+    /* ── ABOUT ── */
+    .about {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 1px solid #e8d5b0;
+        border-radius: 16px;
+        overflow: hidden;
+        margin-bottom: 60px;
+    }
+
+    .about-img-side {
+        overflow: hidden;
+        min-height: 260px;
+    }
+
+        .about-img-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+    .about-text-side {
+        padding: 48px 44px;
+        background: #FAEEDA;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .about-eyebrow {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #854F0B;
+        margin-bottom: 12px;
+    }
+
+    .about-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 24px;
+        color: #412402;
+        margin-bottom: 14px;
+        line-height: 1.3;
+    }
+
+    .about-body {
+        font-size: 14px;
+        color: #633806;
+        line-height: 1.85;
     }
 </style>
 
 <!-- HERO -->
-.hero {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 80px 40px;
-    color: white;
-    border-radius: 15px;
+<div class="hero">
+    <div class="hero-left">
+        <div class="hero-eyebrow">от пчелин в село Кралевдол</div>
+        <h1>Чист натурален<br><em>мед</em> от природата</h1>
+        <p class="hero-sub">100% български пчелни продукти без добавки. Директно от пчелина до вашата трапеза.</p>
 
-    background: url('https://images.unsplash.com/photo-1500595046743-cd271d694d30') no-repeat center center/cover;
-    position: relative;
-}
-
-/* тъмен overlay за по-добър текст */
-.hero::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.4);
-    border-radius: 15px;
-}
-
-.hero-text {
-    position: relative;
-    z-index: 1;
-}
-
-<!-- PRODUCTS -->
-<div class="section">
-    <h2>Нашите продукти</h2>
-    <div class="grid">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1471943038886-87c772c31367">
-            <h5>
-                <a asp-controller="Product"
-                   asp-action="Index"
-                   asp-route-searchStringCategoryName="Мед"
-                   class="btn btn-warning">
-                    Мед
-                </a>
-            </h5>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033">
-                <a asp-controller="Product"
-                   asp-action="Index"
-                   asp-route-searchStringCategoryName="Пчелен прашец"
-                   class="btn btn-warning">
-                    Пчелен прашец
-                </a>
-            </h5>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5">
-            <h5>
-                <a asp-controller="Product"
-                   asp-action="Index"
-                   asp-route-searchStringCategoryName="Прополис"
-                   class="btn btn-warning">
-                   Прополис
-                </a>
-            </h5>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2">
-            <h5>
-                <a asp-controller="Product"
-                   asp-action="Index"
-                   asp-route-searchStringCategoryName="Пчелен восък"
-                   class="btn btn-warning">
-                    Пчелен восък
-                </a>
-            </h5>
-        </div>
+    </div>
+    <div class="hero-right">
+        <img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&q=80" alt="Пчелин с цветя">
+        <div class="hero-badge">✦ 100% натурален</div>
     </div>
 </div>
 
-<!-- BEST SELLERS -->
-<div class="section">
-    <h2>Най-продавани</h2>
-    <div class="grid">
-        @foreach (var item in Model)
-        {
-            <div class="card">
-                <img src="">
-                <h5> @Html.DisplayFor(modelItem => item.ProductName)</h5>
-                <div class="price">@Html.DisplayFor(modelItem => item.Price)</div>
-                <button>Добави в количката</button>
-            </div>
-        }
-        @* <div class="card">
-            <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38">
-            <h5>Букетен мед</h5>
-            <div class="price">16.00 лв.</div>
-            <button>Добави в количката</button>
-        </div>
-
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5">
-            <h5>Пчелен прашец</h5>
-            <div class="price">12.00 лв.</div>
-            <button>Добави в количката</button>
-        </div> *@
-
+<!-- STATS -->
+<div class="stats-strip">
+    <div class="stat-item">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">години опит</div>
     </div>
+    <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">без добавки</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">кошера</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-label">вида продукти</div>
+    </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="section-header">
+    <h2 class="section-title">Нашите продукти</h2>
+    <a asp-controller="Product" asp-action="Index" class="see-all">Виж всички →</a>
+</div>
+<div class="categories-grid">
+    <a asp-controller="Product" asp-action="Index" asp-route-searchStringCategoryName="Мед" class="cat-card">
+        <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=300&h=130&fit=crop" alt="Мед">
+        <div class="cat-name">Мед</div>
+    </a>
+    <a asp-controller="Product" asp-action="Index" asp-route-searchStringCategoryName="Пчелен прашец" class="cat-card">
+        <img src="https://images.unsplash.com/photo-1561181286-d3e7b9a2e194?w=300&h=130&fit=crop" alt="Пчелен прашец">
+        <div class="cat-name">Пчелен прашец</div>
+    </a>
+    <a asp-controller="Product" asp-action="Index" asp-route-searchStringCategoryName="Прополис" class="cat-card">
+        <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=300&h=130&fit=crop" alt="Прополис">
+        <div class="cat-name">Прополис</div>
+    </a>
+    <a asp-controller="Product" asp-action="Index" asp-route-searchStringCategoryName="Пчелен восък" class="cat-card">
+        <img src="https://images.unsplash.com/photo-1620219365994-f443a86a0b09?w=300&h=130&fit=crop" alt="Пчелен восък">
+        <div class="cat-name">Пчелен восък</div>
+    </a>
+</div>
+
+<!-- BEST SELLERS -->
+<div class="section-header">
+    <h2 class="section-title">Най-продавани</h2>
+</div>
+<div class="products-grid">
+    @foreach (var item in Model)
+    {
+        <div class="prod-card">
+            <div class="prod-img-wrap">
+                <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=220&h=150&fit=crop" alt="@item.ProductName">
+            </div>
+            <div class="prod-body">
+                <div class="prod-name">@Html.DisplayFor(modelItem => item.ProductName)</div>
+                <div class="prod-origin">Кралевдол, България</div>
+                <div class="prod-footer">
+                    <div class="prod-price">@Html.DisplayFor(modelItem => item.Price) лв.</div>
+                    <button class="prod-btn">Добави</button>
+                </div>
+            </div>
+        </div>
+    }
 </div>
 
 <!-- ABOUT -->
 <div class="about">
-    <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30">
-    <div class="about-text">
-        <h2>За нас</h2>
-        <p>
+    <div class="about-img-side">
+        <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&q=80" alt="Пчелар">
+    </div>
+    <div class="about-text-side">
+        <div class="about-eyebrow">За нас</div>
+        <h2 class="about-title">Семеен пчелин с душа</h2>
+        <p class="about-body">
             Ние сме семеен пчелин с над 20 години опит и любов към природата.
-            Предлагаме 100% натурални продукти с гарантирано качество.
+            Предлагаме 100% натурални продукти с гарантирано качество,
+            директно от нашите кошери до вашата трапеза.
         </p>
     </div>
 </div>

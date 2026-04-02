@@ -1,10 +1,144 @@
 ﻿@{
-    ViewData["Title"] = "Order Placed!";
+    ViewData["Title"] = "Успешна поръчка";
 }
 
-<div class="text-center mt-5">
-    <h2>✅ Your order was placed successfully!</h2>
-    <p class="text-muted">Thank you for shopping at BeeProductApp.</p>
-    <a asp-controller="Order" asp-action="MyOrders" class="btn btn-warning mt-3">View My Orders</a>
-    <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary mt-3 ms-2">Continue Shopping</a>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'DM Sans', sans-serif;
+        background: #FFF8EE;
+        color: #1a1008;
+    }
+
+    /* ── HEADER ── */
+    .page-eyebrow {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #854F0B;
+        margin-bottom: 12px;
+    }
+
+    .page-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 38px;
+        color: #412402;
+        margin-bottom: 8px;
+        line-height: 1.2;
+    }
+
+        .page-title em {
+            font-style: italic;
+            color: #BA7517;
+        }
+
+    .page-subtitle {
+        font-size: 14px;
+        color: #854F0B;
+        margin-bottom: 40px;
+    }
+
+    /* ── MESSAGE CARD ── */
+    .message-state {
+        background: white;
+        border: 1px solid #e8d5b0;
+        border-radius: 16px;
+        padding: 72px 40px;
+        text-align: center;
+        margin-bottom: 60px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .message-icon {
+        font-size: 52px;
+        margin-bottom: 20px;
+    }
+
+    .message-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 26px;
+        color: #412402;
+        margin-bottom: 10px;
+    }
+
+    .message-sub {
+        font-size: 15px;
+        color: #854F0B;
+        margin-bottom: 32px;
+        line-height: 1.6;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary-dark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #412402;
+        color: #FAC775;
+        border: none;
+        padding: 13px 28px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.2s;
+        cursor: pointer;
+    }
+
+        .btn-primary-dark:hover {
+            background: #633806;
+            color: #FAC775;
+            text-decoration: none;
+        }
+
+    .btn-secondary-light {
+        background: white;
+        color: #854F0B;
+        border: 1px solid #e8d5b0;
+        padding: 13px 28px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: border-color 0.2s, background 0.2s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .btn-secondary-light:hover {
+            border-color: #BA7517;
+            background: #FAEEDA;
+            color: #854F0B;
+            text-decoration: none;
+        }
+</style>
+
+<div class="text-center mt-4">
+    <div class="page-eyebrow">Благодарим ви</div>
+    <h1 class="page-title">Успешна <em>поръчка</em></h1>
+    <p class="page-subtitle">Вашите натурални продукти скоро ще бъдат при вас</p>
+</div>
+
+<div class="message-state shadow-sm">
+    <div class="message-icon">✨</div>
+    <div class="message-title">Поръчката е приета успешно!</div>
+    <p class="message-sub">
+        Благодарим ви, че избрахте BeeProductApp. Започваме подготовката на вашите продукти от Кралевдол с много внимание и грижа.
+    </p>
+
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <a asp-controller="Order" asp-action="MyOrders" class="btn-primary-dark">Преглед на поръчките</a>
+        <a asp-controller="Product" asp-action="Index" class="btn-secondary-light">Продължи с пазаруването</a>
+    </div>
 </div>

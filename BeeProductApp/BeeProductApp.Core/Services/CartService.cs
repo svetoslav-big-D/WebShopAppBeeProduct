@@ -83,9 +83,6 @@ namespace BeeProductApp.Core.Services
                 .Sum(c => c.TotalPrice);
         }
 
-        List<CartItem> ICartService.GetCartItems(string userId)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

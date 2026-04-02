@@ -44,6 +44,7 @@ namespace BeeProductApp
             builder.Services.AddTransient<IOrderService, OrderService>();
             builder.Services.AddTransient<IStatisticService, StatisticsService>();
             builder.Services.AddTransient<IFavouriteService, FavouriteService>();
+            builder.Services.AddTransient<ICartService, CartService>();
 
 
             var app = builder.Build();

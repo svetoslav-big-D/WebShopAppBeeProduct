@@ -1,4 +1,84 @@
 ﻿@{
+    ViewData["Title"] = "Успешно";
+}
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'DM Sans', sans-serif;
+        background: #FFF8EE;
+        color: #1a1008;
+    }
+
+    .success-wrap {
+        max-width: 520px;
+        margin: 60px auto;
+        background: white;
+        border: 1px solid #e8d5b0;
+        border-radius: 16px;
+        padding: 60px 48px;
+        text-align: center;
+    }
+
+    .success-icon {
+        font-size: 56px;
+        margin-bottom: 20px;
+    }
+
+    .success-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 28px;
+        color: #412402;
+        margin-bottom: 12px;
+        line-height: 1.2;
+    }
+
+        .success-title em {
+            font-style: italic;
+            color: #BA7517;
+        }
+
+    .success-sub {
+        font-size: 14px;
+        color: #854F0B;
+        line-height: 1.75;
+        margin-bottom: 36px;
+    }
+
+    .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #412402;
+        color: #FAC775;
+        border: none;
+        padding: 13px 28px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+
+        .btn-primary:hover {
+            background: #633806;
+            color: #FAC775;
+            text-decoration: none;
+        }
+</style>
+
+<div class="success-wrap">
+    <div class="success-icon">🗑️</div>
+    <h1 class="success-title">Продуктът беше <em>изтрит</em></h1>
+    <p class="success-sub">Продуктът беше успешно премахнат от системата.</p>
+    <a asp-action="Index" class="btn-primary">← Обратно към продуктите</a>
+</div>
+@{
     ViewData["Title"] = "Success";
 }
 

@@ -1,80 +1,314 @@
 ﻿@using BeeProductApp.Controllers
 @using BeeProductApp.Models.Cart
-using BeeProductApp.Models.Cart
 @model CartIndexVM
 @{
-    ViewData["Title"] = "My Cart";
+    ViewData["Title"] = "Моята количка";
 }
 
-<h2 class="mb-4">🧺 My Cart</h2>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
-@if (!Model.Items.Any())
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'DM Sans', sans-serif;
+        background: #FFF8EE;
+        color: #1a1008;
+    }
+
+    /* ── HEADER ── */
+    .page-eyebrow {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #854F0B;
+        margin-bottom: 12px;
+    }
+
+    .page-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 38px;
+        color: #412402;
+        margin-bottom: 8px;
+        line-height: 1.2;
+    }
+
+        .page-title em {
+            font-style: italic;
+            color: #BA7517;
+        }
+
+    .page-subtitle {
+        font-size: 14px;
+        color: #854F0B;
+        margin-bottom: 40px;
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+        background: white;
+        border: 1px solid #e8d5b0;
+        border-radius: 16px;
+        padding: 72px 40px;
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .empty-icon {
+        font-size: 52px;
+        margin-bottom: 20px;
+    }
+
+    .empty-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 22px;
+        color: #412402;
+        margin-bottom: 10px;
+    }
+
+    .empty-sub {
+        font-size: 14px;
+        color: #854F0B;
+        margin-bottom: 28px;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary-dark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #412402;
+        color: #FAC775;
+        border: none;
+        padding: 13px 28px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.2s;
+        cursor: pointer;
+    }
+
+        .btn-primary-dark:hover {
+            background: #633806;
+            color: #FAC775;
+            text-decoration: none;
+        }
+
+    .btn-secondary-light {
+        background: white;
+        color: #854F0B;
+        border: 1px solid #e8d5b0;
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: border-color 0.2s, background 0.2s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .btn-secondary-light:hover {
+            border-color: #BA7517;
+            background: #FAEEDA;
+            color: #854F0B;
+        }
+
+    .btn-secondary-light-large {
+        padding: 13px 28px;
+        font-size: 14px;
+    }
+
+    /* ── CART GRID / TABLE ── */
+    .cart-wrapper {
+        background: white;
+        border: 1px solid #e8d5b0;
+        border-radius: 16px;
+        padding: 30px;
+        margin-bottom: 60px;
+    }
+
+    .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+        .cart-table th {
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #854F0B;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e8d5b0;
+            text-align: left;
+        }
+
+        .cart-table td {
+            padding: 20px 0;
+            vertical-align: middle;
+            border-bottom: 1px solid #fcf7ef;
+        }
+
+    .cart-img-wrap {
+        width: 80px;
+        height: 80px;
+        overflow: hidden;
+        background: #FAEEDA;
+        border: 1px solid #e8d5b0;
+        border-radius: 8px;
+        flex-shrink: 0;
+    }
+
+        .cart-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+    .cart-product-name {
+        font-family: 'DM Sans', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #412402;
+        margin-bottom: 4px;
+    }
+
+    .cart-unit-price {
+        font-size: 13px;
+        color: #854F0B;
+    }
+
+    .cart-price {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+        color: #BA7517;
+    }
+
+    .discount-badge {
+        background: #FAEEDA;
+        color: #BA7517;
+        border: 1px solid #e8d5b0;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 500;
+    }
+
+    .cart-footer {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-top: 24px;
+        padding-top: 24px;
+        border-top: 1px solid #e8d5b0;
+    }
+
+    .grand-total-label {
+        font-size: 12px;
+        color: #854F0B;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 8px;
+    }
+
+    .grand-total-price {
+        font-family: 'Playfair Display', serif;
+        font-size: 38px;
+        color: #BA7517;
+        margin-bottom: 24px;
+        line-height: 1;
+    }
+</style>
+
+<div class="page-eyebrow">Продукти в количката</div>
+<h1 class="page-title">Моята <em>количка</em></h1>
+<p class="page-subtitle">Прегледайте избраните продукти преди да завършите поръчката</p>
+
+@if (Model.Items == null || Model.Items.Count == 0)
 {
-    <div class="alert alert-info">
-        Your cart is empty.
-        <a asp-controller="Product" asp-action="Index">Browse products</a>
+    <div class="empty-state">
+        <div class="empty-icon">🛒</div>
+        <div class="empty-title">Количката ви е празна</div>
+        <p class="empty-sub">Време е да я напълните с нещо сладко и здравословно.</p>
+        <a asp-controller="Product" asp-action="Index" class="btn-primary-dark">Разгледай продуктите →</a>
     </div>
 }
 else
 {
-    <table class="table table-striped align-middle">
-        <thead class="table-warning">
-            <tr>
-                <th>Product</th>
-                <th>Unit Price</th>
-                <th>Discount</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
+    <div class="cart-wrapper">
+        <table class="cart-table">
+            <thead>
                 <tr>
-                    <td>
-                        <div class="d-flex align-items-center gap-2">
-                            <img src="@item.Picture" alt="@item.ProductName"
-                                 style="width:50px;height:50px;object-fit:cover;" class="rounded" />
-                            @item.ProductName
-                        </div>
-                    </td>
-                    <td>@item.Price.ToString("F2") лв.</td>
-                    <td>
-                        @if (item.Discount > 0)
-                        {
-                            <span class="badge bg-warning text-dark">-@item.Discount%</span>
-                        }
-                        else
-                        {
-                            <span class="text-muted">—</span>
-                        }
-                    </td>
-                    <td>@item.Quantity</td>
-                    <td class="fw-bold">@item.TotalPrice.ToString("F2") лв.</td>
-                    <td>
-                        <form asp-controller="Cart" asp-action="Remove" method="post">
-                            @Html.AntiForgeryToken()
-                            <input type="hidden" name="productId" value="@item.ProductId" />
-                            <button type="submit" class="btn btn-outline-danger btn-sm">Remove</button>
-                        </form>
-                    </td>
+                    <th style="width: 45%;">Продукт</th>
+                    <th style="width: 15%;">Отстъпка</th>
+                    <th style="width: 15%;">Количество</th>
+                    <th style="width: 15%;">Общо</th>
+                    <th style="width: 10%;"></th>
                 </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="4" class="text-end fw-bold">Grand Total:</td>
-                <td colspan="2" class="fw-bold text-danger">@Model.GrandTotal.ToString("F2") лв.</td>
-            </tr>
-        </tfoot>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="cart-img-wrap">
+                                    <img src="@item.Picture" alt="@item.ProductName" />
+                                </div>
+                                <div>
+                                    <div class="cart-product-name">@item.ProductName</div>
+                                    <div class="cart-unit-price">@item.Price.ToString("F2") лв. / бр.</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            @if (item.Discount > 0)
+                            {
+                                <span class="discount-badge">-@item.Discount%</span>
+                            }
+                            else
+                            {
+                                <span style="color: #c4b5a3;">—</span>
+                            }
+                        </td>
+                        <td style="font-weight: 500; color: #633806;">
+                            @item.Quantity бр.
+                        </td>
+                        <td class="cart-price">
+                            @item.TotalPrice.ToString("F2") лв.
+                        </td>
+                        <td class="text-end">
+                            <form asp-controller="Cart" asp-action="Remove" method="post" style="margin: 0;">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <button type="submit" class="btn-secondary-light">Премахни</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-    <div class="d-flex justify-content-end gap-3 mt-3">
-        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary">Continue Shopping</a>
-        <form asp-controller="Cart" asp-action="Checkout" method="post">
-            @Html.AntiForgeryToken()
-            <button type="submit" class="btn btn-success">✅ Place Order</button>
-        </form>
+        <div class="cart-footer">
+            <div class="grand-total-label">Обща сума</div>
+            <div class="grand-total-price">@Model.GrandTotal.ToString("F2") лв.</div>
+
+            <div class="d-flex gap-3 flex-wrap justify-content-end">
+                <a asp-controller="Product" asp-action="Index" class="btn-secondary-light btn-secondary-light-large">Продължи с пазаруването</a>
+                <form asp-controller="Cart" asp-action="Checkout" method="post" style="margin: 0;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn-primary-dark">Завърши поръчката</button>
+                </form>
+            </div>
+        </div>
     </div>
 }

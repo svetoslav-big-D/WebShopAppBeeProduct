@@ -1,9 +1,120 @@
 ﻿@{
-    ViewData["Title"] = "Cannot Complete Order";
+    ViewData["Title"] = "Няма наличност";
 }
 
-<div class="text-center mt-5">
-    <h2 class="text-danger">⚠️ Some items in your cart are out of stock.</h2>
-    <p class="text-muted">Please review your cart and adjust quantities.</p>
-    <a asp-controller="Cart" asp-action="Index" class="btn btn-warning mt-3">Back to Cart</a>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'DM Sans', sans-serif;
+        background: #FFF8EE;
+        color: #1a1008;
+    }
+
+    /* ── HEADER ── */
+    .page-eyebrow {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #854F0B;
+        margin-bottom: 12px;
+    }
+
+    .page-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 38px;
+        color: #412402;
+        margin-bottom: 8px;
+        line-height: 1.2;
+    }
+
+        .page-title em {
+            font-style: italic;
+            color: #BA7517;
+        }
+
+    .page-subtitle {
+        font-size: 14px;
+        color: #854F0B;
+        margin-bottom: 40px;
+    }
+
+    /* ── MESSAGE CARD ── */
+    .message-state {
+        background: white;
+        border: 1px solid #e8d5b0;
+        border-radius: 16px;
+        padding: 72px 40px;
+        text-align: center;
+        margin-bottom: 60px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .message-icon {
+        font-size: 52px;
+        margin-bottom: 20px;
+    }
+
+    .message-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 26px;
+        color: #412402;
+        margin-bottom: 10px;
+    }
+
+    .message-sub {
+        font-size: 15px;
+        color: #854F0B;
+        margin-bottom: 32px;
+        line-height: 1.6;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-primary-dark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        background: #412402;
+        color: #FAC775;
+        border: none;
+        padding: 13px 28px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: background 0.2s;
+        cursor: pointer;
+    }
+
+        .btn-primary-dark:hover {
+            background: #633806;
+            color: #FAC775;
+            text-decoration: none;
+        }
+</style>
+
+<div class="text-center mt-4">
+    <div class="page-eyebrow">Внимание</div>
+    <h1 class="page-title">Липсваща <em>наличност</em></h1>
+    <p class="page-subtitle">Не можем да завършим вашата поръчка в момента</p>
+</div>
+
+<div class="message-state shadow-sm">
+    <div class="message-icon">⚠️</div>
+    <div class="message-title">Някои продукти са изчерпани</div>
+    <p class="message-sub">
+        Изглежда някои от артикулите във вашата количка вече не са налични в желаните количества. Моля, прегледайте я и направете корекции.
+    </p>
+
+    <div class="d-flex justify-content-center">
+        <a asp-controller="Cart" asp-action="Index" class="btn-primary-dark">Обратно към количката →</a>
+    </div>
 </div>
