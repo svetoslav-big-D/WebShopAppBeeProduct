@@ -94,21 +94,41 @@
 </style>
 
 <!-- HERO -->
-<div class="hero">
-    <div class="hero-text">
-        <h1>Чист натурален мед от пчелин в село Кралевдол</h1>
-        <p>100% български пчелни продукти без добавки</p>
-        <button>Разгледай продуктите</button>
-    </div>
-    <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38" />
-</div>
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 40px;
+    color: white;
+    border-radius: 15px;
+
+    background: url('https://images.unsplash.com/photo-1500595046743-cd271d694d30') no-repeat center center/cover;
+    position: relative;
+}
+
+/* тъмен overlay за по-добър текст */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    border-radius: 15px;
+}
+
+.hero-text {
+    position: relative;
+    z-index: 1;
+}
 
 <!-- PRODUCTS -->
 <div class="section">
     <h2>Нашите продукти</h2>
     <div class="grid">
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38" width="150" height="150">
+            <img src="https://images.unsplash.com/photo-1471943038886-87c772c31367">
             <h5>
                 <a asp-controller="Product"
                    asp-action="Index"
@@ -120,8 +140,7 @@
         </div>
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1606312619349-9b6c0b0c7e5c" width="150" height="150">
-            <h5>
+            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033">
                 <a asp-controller="Product"
                    asp-action="Index"
                    asp-route-searchStringCategoryName="Пчелен прашец"
@@ -132,20 +151,19 @@
         </div>
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5" width="150" height="150">
-
+            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5">
             <h5>
                 <a asp-controller="Product"
                    asp-action="Index"
                    asp-route-searchStringCategoryName="Прополис"
                    class="btn btn-warning">
-                    Прополис
+                   Прополис
                 </a>
             </h5>
         </div>
 
         <div class="card">
-            <img src="https://images.unsplash.com/photo-1620219365994-f443a86a0b09" width="150" height="150">
+            <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2">
             <h5>
                 <a asp-controller="Product"
                    asp-action="Index"
