@@ -34,6 +34,7 @@ namespace BeeProductApp.Models.Product
         [Display(Name = "Quantity")]
         public int Quantity { get; set; }
 
+        [Range(0, 5000)]
         [Display(Name = "Prise")]
         public decimal Price { get; set; }
 

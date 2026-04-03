@@ -102,8 +102,8 @@ namespace BeeProductApp.Infrastructure.Data.Infrastucture
             dataBrand.Brands.AddRange(new[]
             {
                 new Brand { BrandName = "BeeKeeper" },
-                
-              
+                new Brand { BrandName = "BeeKeeperPremium" },
+
             });
 
             dataBrand.SaveChanges();

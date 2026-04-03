@@ -15,9 +15,11 @@
             font-family: 'DM Sans', sans-serif;
             background: #FFF8EE;
             color: #1a1008;
+            /* Flexbox настройки за Sticky Footer */
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            margin: 0;
         }
 
         /* ── NAVBAR ── */
@@ -73,9 +75,9 @@
                 color: #BA7517;
             }
 
-        /* ── FOOTER ── */
-        main {
-            flex: 1;
+        /* ── FOOTER ЛОГИКА ── */
+        .main-content {
+            flex: 1; /* Това кара този div да заеме цялото оставащо пространство и да избута футъра */
         }
 
         .custom-footer {
@@ -84,6 +86,7 @@
             color: #854F0B !important;
             padding: 20px 0;
             font-size: 14px;
+            margin-top: auto; /* Допълнителна застраховка, че стои долу */
         }
 
             .custom-footer a {
@@ -168,7 +171,7 @@
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container main-content">
         <main role="main" class="pb-5">
             @RenderBody()
         </main>
