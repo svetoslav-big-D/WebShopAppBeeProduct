@@ -347,13 +347,11 @@
     }
 </style>
 
-<!-- HERO -->
 <div class="hero">
     <div class="hero-left">
         <div class="hero-eyebrow">от пчелин в село Кралевдол</div>
         <h1>Чист натурален<br><em>мед</em> от природата</h1>
         <p class="hero-sub">100% български пчелни продукти без добавки. Директно от пчелина до вашата трапеза.</p>
-
     </div>
     <div class="hero-right">
         <img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&q=80" alt="Пчелин с цветя">
@@ -361,7 +359,6 @@
     </div>
 </div>
 
-<!-- STATS -->
 <div class="stats-strip">
     <div class="stat-item">
         <div class="stat-num">20+</div>
@@ -381,7 +378,6 @@
     </div>
 </div>
 
-<!-- CATEGORIES -->
 <div class="section-header">
     <h2 class="section-title">Нашите продукти</h2>
     <a asp-controller="Product" asp-action="Index" class="see-all">Виж всички →</a>
@@ -405,16 +401,17 @@
     </a>
 </div>
 
-<!-- BEST SELLERS -->
 <div class="section-header">
     <h2 class="section-title">Най-продавани</h2>
 </div>
 <div class="products-grid">
-    @foreach (var item in Model)
+    @* Взимаме топ 3 продукта. Сортирането трябва да е направено в Controller-а *@
+    @foreach (var item in Model.Take(3))
     {
         <div class="prod-card">
             <div class="prod-img-wrap">
-                <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=220&h=150&fit=crop" alt="@item.ProductName">
+                @* Използваме динамичната снимка от модела (@item.Picture), аналогично на поръчките *@
+                <img src="@item.Picture" alt="@item.ProductName">
             </div>
             <div class="prod-body">
                 <div class="prod-name">@Html.DisplayFor(modelItem => item.ProductName)</div>
@@ -428,7 +425,6 @@
     }
 </div>
 
-<!-- ABOUT -->
 <div class="about">
     <div class="about-img-side">
         <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=600&q=80" alt="Пчелар">

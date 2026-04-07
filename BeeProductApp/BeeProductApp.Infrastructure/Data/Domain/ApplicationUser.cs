@@ -22,5 +22,7 @@ namespace BeeProductApp.Infrastructure.Data.Domain
         [Required]
         [MaxLength(50)]
         public string Address { get; set; } = null!;
+        public virtual IEnumerable<Favourite> Favourites { get; set; } = new List<Favourite>();
+
     }
 }

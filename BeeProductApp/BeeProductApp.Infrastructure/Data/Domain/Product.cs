@@ -39,5 +39,6 @@ namespace BeeProductApp.Infrastructure.Data.Domain
         public decimal Discount { get; set; }
 
         public virtual IEnumerable<Order> Orders { get; set; } = new List<Order>();
+        public virtual IEnumerable<Favourite> Favourites { get; set; } = new List<Favourite>();
     }
 }

@@ -113,11 +113,12 @@ namespace BeeProductApp.Core.Services
 
         public List<Product> GetTop3Products()
         {
-            return _context.Orders
-                .GroupBy(o => o.ProductId)
+            return _context.Products
+                .OrderByDescending(p => p.Orders.Count())
                 .Take(3)
-                .Select(g => g.First().Product)
                 .ToList();
+
+                
         }
 
     }
